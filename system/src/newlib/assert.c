@@ -29,18 +29,20 @@
 #include <stdlib.h>
 #include <stdint.h>
 
-#include "diag/Trace.h"
-
 // ----------------------------------------------------------------------------
 
 void
 __attribute__((noreturn))
-__assert_func (const char *file, int line, const char *func,
-               const char *failedexpr)
+__assert_func (	const char *file __attribute__((unused)),
+				int line __attribute__((unused)),
+				const char *func __attribute__((unused)),
+				const char *failedexpr __attribute__((unused)))
 {
-  trace_printf ("assertion \"%s\" failed: file \"%s\", line %d%s%s\n",
+  /*
+	trace_printf ("assertion \"%s\" failed: file \"%s\", line %d%s%s\n",
                 failedexpr, file, line, func ? ", function: " : "",
                 func ? func : "");
+   */
   abort ();
   /* NOTREACHED */
 }
@@ -65,9 +67,9 @@ assert_failed (uint8_t* file, uint32_t line);
 // Called from the assert_param() macro, usually defined in the stm32f*_conf.h
 void
 __attribute__((noreturn, weak))
-assert_failed (uint8_t* file, uint32_t line)
+assert_failed (uint8_t* file __attribute__((unused)), uint32_t line __attribute__((unused)))
 {
-  trace_printf ("assert_param() failed: file \"%s\", line %d\n", file, line);
+  //trace_printf ("assert_param() failed: file \"%s\", line %d\n", file, line);
   abort ();
   /* NOTREACHED */
 }

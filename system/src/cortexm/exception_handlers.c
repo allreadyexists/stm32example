@@ -30,7 +30,7 @@
 #include "cortexm/ExceptionHandlers.h"
 #include "cmsis_device.h"
 #include "arm/semihosting.h"
-#include "diag/Trace.h"
+
 #include <string.h>
 
 // ----------------------------------------------------------------------------
@@ -101,10 +101,13 @@ NMI_Handler (void)
 // (See Joseph Yiu's book).
 
 void
-dumpExceptionStack (ExceptionStackFrame* frame,
-                uint32_t cfsr, uint32_t mmfar, uint32_t bfar,
-                                        uint32_t lr)
+dumpExceptionStack (ExceptionStackFrame* frame __attribute__((unused)),
+		uint32_t cfsr __attribute__((unused)),
+		uint32_t mmfar __attribute__((unused)),
+		uint32_t bfar __attribute__((unused)),
+		uint32_t lr __attribute__((unused)))
 {
+  /*
   trace_printf ("Stack frame:\n");
   trace_printf (" R0 =  %08X\n", frame->r0);
   trace_printf (" R1 =  %08X\n", frame->r1);
@@ -130,6 +133,7 @@ dumpExceptionStack (ExceptionStackFrame* frame,
     }
   trace_printf ("Misc\n");
   trace_printf (" LR/EXC_RETURN= %08X\n", lr);
+  */
 }
 
 #endif // defined(__ARM_ARCH_7M__) || defined(__ARM_ARCH_7EM__)
@@ -395,7 +399,7 @@ HardFault_Handler_C (ExceptionStackFrame* frame __attribute__((unused)),
 #endif
 
 #if defined(TRACE)
-  trace_printf ("[HardFault]\n");
+  //trace_printf ("[HardFault]\n");
   dumpExceptionStack (frame, cfsr, mmfar, bfar, lr);
 #endif // defined(TRACE)
 
@@ -505,7 +509,7 @@ BusFault_Handler_C (ExceptionStackFrame* frame __attribute__((unused)),
   uint32_t bfar = SCB->BFAR; // Bus Fault Address
   uint32_t cfsr = SCB->CFSR; // Configurable Fault Status Registers
 
-  trace_printf ("[BusFault]\n");
+  //trace_printf ("[BusFault]\n");
   dumpExceptionStack (frame, cfsr, mmfar, bfar, lr);
 #endif // defined(TRACE)
 
@@ -559,7 +563,7 @@ UsageFault_Handler_C (ExceptionStackFrame* frame __attribute__((unused)),
 #endif
 
 #if defined(TRACE)
-  trace_printf ("[UsageFault]\n");
+  //trace_printf ("[UsageFault]\n");
   dumpExceptionStack (frame, cfsr, mmfar, bfar, lr);
 #endif // defined(TRACE)
 

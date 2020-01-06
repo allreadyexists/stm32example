@@ -28,7 +28,6 @@
 // ----------------------------------------------------------------------------
 
 #include <stdlib.h>
-#include "diag/Trace.h"
 
 // ----------------------------------------------------------------------------
 
@@ -55,7 +54,7 @@ _exit(int code);
 // is required.
 
 void
-__attribute__((weak))
+__attribute__((weak, noreturn))
 _exit(int code __attribute__((unused)))
 {
 #if !defined(DEBUG)
@@ -73,8 +72,6 @@ void
 __attribute__((weak,noreturn))
 abort(void)
 {
-  trace_puts("abort(), exiting...");
-
   _exit(1);
 }
 
