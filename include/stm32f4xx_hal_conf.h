@@ -58,7 +58,8 @@
 /**
   * @brief This is the list of modules to be used in the HAL driver 
   */
-#define HAL_MODULE_ENABLED  
+#define HAL_MODULE_ENABLED
+#ifdef HAL_MODULE_ENABLED
 #define HAL_ADC_MODULE_ENABLED
 #define HAL_CAN_MODULE_ENABLED
 #define HAL_CRC_MODULE_ENABLED
@@ -77,7 +78,7 @@
 #define HAL_SDRAM_MODULE_ENABLED
 #define HAL_HASH_MODULE_ENABLED
 #define HAL_GPIO_MODULE_ENABLED
-#define HAL_I2C_MODULE_ENABLED
+ #define HAL_I2C_MODULE_ENABLED
 #define HAL_I2S_MODULE_ENABLED
 #define HAL_IWDG_MODULE_ENABLED
 #define HAL_LTDC_MODULE_ENABLED
@@ -103,6 +104,9 @@
 #define HAL_SPDIFRX_MODULE_ENABLED
 #define HAL_DFSDM_MODULE_ENABLED
 #define HAL_LPTIM_MODULE_ENABLED
+#else
+#include <stdio.h>
+#endif
 
 /* ########################## HSE/HSI Values adaptation ##################### */
 /**
