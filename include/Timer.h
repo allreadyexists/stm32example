@@ -60,9 +60,9 @@ public:
   {
     // Decrement to zero the counter used by the delay routine.
     if (ms_delayCount != 0u)
-      {
-        --ms_delayCount;
-      }
+    {
+    	--ms_delayCount;
+    }
   }
 };
 

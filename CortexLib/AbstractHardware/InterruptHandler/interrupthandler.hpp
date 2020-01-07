@@ -9,16 +9,19 @@
 #include "tim2registers.hpp"  //for TIM2
 #include "gpiocregisters.hpp"  //for TIM2
 
+#include "Timer.h"
+
 class InterruptHandler {
   public:
     static void DummyHandler() { for(;;) {} }
-    static void Timer2Handler()
+    static void SysTick_Handler()
     {
-      if (TIM2::SR::UIF::UpdatePending::IsSet())
+    	Timer::tick();
+      /*if (TIM2::SR::UIF::UpdatePending::IsSet())
       {
         TIM2::SR::UIF::NoUpdate::Set();
         Pin<Port<GPIOC>, 8U, PinWriteable>::Toggle() ;
-      }
+      }*/
     }
 };
 
